@@ -1,0 +1,76 @@
+.admin-levels {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.admin-levels__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  border: var(--border-width) solid var(--color-border);
+  background: rgba(0, 0, 0, 0.1);
+  cursor: grab;
+  touch-action: none;
+}
+
+.admin-levels__item:active {
+  cursor: grabbing;
+}
+
+.admin-levels__item--dragging {
+  opacity: 0.5;
+  background: var(--color-active);
+}
+
+.admin-levels__drag {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  user-select: none;
+}
+
+.admin-levels__cover {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+  border: var(--border-width) solid var(--color-border);
+}
+
+.admin-levels__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-levels__number {
+  font-size: var(--font-size-xs);
+  color: var(--color-accent);
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.admin-levels__title {
+  font-size: var(--font-size-sm);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-levels__actions {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.admin-levels__delete {
+  padding: var(--space-xs) var(--space-sm);
+  border: var(--border-width) solid rgba(196, 122, 106, 0.5);
+  color: var(--color-error);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  cursor: pointer;
+  background: transparent;
+}
+
+.admin-levels__delete:hover {
+  background: rgba(196, 122, 106, 0.1);
+}

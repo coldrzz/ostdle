@@ -1,0 +1,16 @@
+node_modules/
+dist/
+build/
+.env
+.env.local
+*.log
+.DS_Store
+Thumbs.db
+__pycache__/
+*.pyc
+.venv/
+venv/
+assets/audio/*.mp3
+assets/audio/*.wav
+assets/audio/*.ogg
+!assets/audio/.gitkeep

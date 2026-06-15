@@ -1,0 +1,85 @@
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.timeline__video {
+  width: 100%;
+  max-height: 300px;
+  background: #000;
+  border: var(--border-width) solid var(--color-border);
+}
+
+.timeline__info {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.timeline__track {
+  position: relative;
+  height: 48px;
+  background: rgba(0, 0, 0, 0.3);
+  border: var(--border-width) solid var(--color-border);
+  cursor: pointer;
+  user-select: none;
+}
+
+.timeline__progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: rgba(196, 208, 170, 0.15);
+  pointer-events: none;
+}
+
+.timeline__selection {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background: rgba(196, 208, 170, 0.3);
+  border-left: 2px solid var(--color-accent);
+  border-right: 2px solid var(--color-accent);
+  pointer-events: none;
+}
+
+.timeline__handle {
+  position: absolute;
+  top: 0;
+  width: 12px;
+  height: 100%;
+  background: var(--color-accent);
+  opacity: 0.8;
+  cursor: ew-resize;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.timeline__handle:hover {
+  opacity: 1;
+}
+
+.timeline__playhead {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: #fff;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.timeline__controls {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.timeline__time-display {
+  font-family: var(--font-display);
+  font-size: var(--font-size-lg);
+  color: var(--color-accent);
+  letter-spacing: 0.1em;
+}

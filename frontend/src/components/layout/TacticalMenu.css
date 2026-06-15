@@ -1,0 +1,51 @@
+.tactical-menu {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  width: var(--menu-width);
+  flex-shrink: 0;
+}
+
+.tactical-menu__item {
+  display: block;
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  border: var(--border-width) solid var(--color-border);
+  background: transparent;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--color-text-primary);
+  transition: background var(--transition-fast);
+  cursor: pointer;
+}
+
+.tactical-menu__item:hover {
+  background: var(--color-hover);
+}
+
+.tactical-menu__item--active {
+  background: var(--color-active);
+}
+
+.tactical-menu__item:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .tactical-menu {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .tactical-menu__item {
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+  }
+}

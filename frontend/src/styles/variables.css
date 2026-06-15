@@ -1,0 +1,59 @@
+:root {
+  /* Base palette - MGS3 tactical */
+  --color-bg-dark: #2b2b25;
+  --color-bg-darker: #2c2c26;
+  --color-panel: #747469;
+  --color-panel-alt: #707066;
+  --color-panel-muted: #5f5f55;
+  --color-panel-light: #8b8b7f;
+  --color-text-primary: #d0d0c5;
+  --color-text-secondary: #a8a89c;
+  --color-text-muted: #8b8b7f;
+  --color-accent: #c4d0aa;
+  --color-accent-dim: rgba(196, 208, 170, 0.6);
+  --color-border: rgba(0, 0, 0, 0.4);
+  --color-border-light: rgba(255, 255, 255, 0.1);
+  --color-hover: rgba(255, 255, 255, 0.08);
+  --color-active: rgba(255, 255, 255, 0.15);
+  --color-error: #c47a6a;
+  --color-success: #8ba87a;
+  --color-life-active: #c4d0aa;
+  --color-life-inactive: rgba(0, 0, 0, 0.3);
+
+  /* Typography */
+  --font-primary: 'IBM Plex Sans Condensed', 'Rajdhani', system-ui, sans-serif;
+  --font-display: 'Rajdhani', 'IBM Plex Sans Condensed', system-ui, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 2.5rem;
+  --letter-spacing-wide: 0.12em;
+  --letter-spacing-wider: 0.2em;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+
+  /* Layout */
+  --top-bar-height: 48px;
+  --bottom-bar-height: 32px;
+  --menu-width: 220px;
+  --border-width: 1px;
+  --panel-max-width: 1200px;
+
+  /* Animation */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 500ms ease;
+
+  /* Effects */
+  --shadow-panel: inset 0 0 60px rgba(0, 0, 0, 0.15);
+  --noise-opacity: 0.04;
+}

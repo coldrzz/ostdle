@@ -1,0 +1,27 @@
+.lives {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.lives__label {
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-right: var(--space-xs);
+}
+
+.lives__indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-life-active);
+  transition: background var(--transition-slow), opacity var(--transition-slow), transform var(--transition-base);
+}
+
+.lives__indicator--lost {
+  background: var(--color-life-inactive);
+  opacity: 0.5;
+  transform: scale(0.8);
+}

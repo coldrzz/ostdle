@@ -1,0 +1,56 @@
+.tactical-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  border: var(--border-width) solid var(--color-border);
+  background: transparent;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+  cursor: pointer;
+  min-width: 120px;
+}
+
+.tactical-btn:hover:not(:disabled) {
+  background: var(--color-hover);
+  border-color: rgba(0, 0, 0, 0.5);
+}
+
+.tactical-btn:active:not(:disabled) {
+  background: var(--color-active);
+}
+
+.tactical-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.tactical-btn--primary {
+  border-color: var(--color-accent-dim);
+  color: var(--color-accent);
+}
+
+.tactical-btn--primary:hover:not(:disabled) {
+  background: rgba(196, 208, 170, 0.1);
+}
+
+.tactical-btn--danger {
+  border-color: rgba(196, 122, 106, 0.5);
+  color: var(--color-error);
+}
+
+.tactical-btn--large {
+  padding: var(--space-md) var(--space-xl);
+  font-size: var(--font-size-base);
+  min-width: 200px;
+}
+
+.tactical-btn--full {
+  width: 100%;
+}

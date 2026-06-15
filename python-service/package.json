@@ -1,0 +1,9 @@
+{
+  "name": "ostdle-python-service",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "python app.py",
+    "start": "gunicorn --bind 0.0.0.0:5001 --timeout 300 app:app"
+  }
+}
