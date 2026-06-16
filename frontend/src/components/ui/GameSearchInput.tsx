@@ -13,7 +13,7 @@ interface GameSearchInputProps {
   value: string;
   onChange: (value: string) => void;
   onSelect: (game: GameSuggestion) => void;
-  onSubmit: () => void;
+  onSubmit: (game?: GameSuggestion) => void;
   placeholder?: string;
   disabled?: boolean;
 }
@@ -45,6 +45,17 @@ export function GameSearchInput({
     [onChange, onSelect],
   );
 
+  const submitSelection = useCallback(
+    (game?: GameSuggestion) => {
+      if (game) {
+        onChange(game.name);
+        onSelect(game);
+      }
+      onSubmit(game);
+    },
+    [onChange, onSelect, onSubmit],
+  );
+
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (!showDropdown || suggestions.length === 0) {
       if (e.key === 'Enter') {
@@ -70,10 +81,12 @@ export function GameSearchInput({
       case 'Enter':
         e.preventDefault();
         if (highlightIndex >= 0 && suggestions[highlightIndex]) {
-          handleSelect(suggestions[highlightIndex]);
+          submitSelection(suggestions[highlightIndex]);
         } else {
-          onSubmit();
+          submitSelection(suggestions[0]);
         }
+        setIsOpen(false);
+        setHighlightIndex(-1);
         break;
       case 'Escape':
         setIsOpen(false);

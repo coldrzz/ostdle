@@ -3,7 +3,7 @@ import { gamesApi } from '@/services/gamesApi';
 import { useDebounce } from './useDebounce';
 
 export function useGameSearch(query: string, enabled = true) {
-  const debouncedQuery = useDebounce(query, 300);
+  const debouncedQuery = useDebounce(query, 400);
 
   return useQuery({
     queryKey: ['games', 'search', debouncedQuery],

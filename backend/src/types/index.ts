@@ -25,20 +25,13 @@ export interface ReorderLevelsDto {
   orderedIds: string[];
 }
 
-export interface RawgGame {
+export interface IgdbGame {
   id: number;
   name: string;
-  slug: string;
-  released?: string;
-  background_image?: string | null;
-  platforms?: Array<{ platform: { id: number; name: string; slug: string } }>;
-}
-
-export interface RawgSearchResponse {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: RawgGame[];
+  first_release_date?: number;
+  cover?: { image_id?: string };
+  platforms?: Array<{ id: number; name: string }>;
+  total_rating_count?: number;
 }
 
 export interface GameSuggestion {

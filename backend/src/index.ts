@@ -33,9 +33,9 @@ app.use(errorHandler);
 app.listen(config.port, () => {
   console.log(`[Backend] Server running on http://localhost:${config.port}`);
   console.log(`[Backend] Environment: ${config.nodeEnv}`);
-  if (!config.rawgApiKey) {
-    console.warn('[Backend] WARNING: RAWG_API_KEY is not set');
+  if (!config.igdbClientId || !config.igdbClientSecret) {
+    console.warn('[Backend] WARNING: IGDB_CLIENT_ID or IGDB_CLIENT_SECRET is not set');
   } else {
-    console.log('[Backend] RAWG API key loaded');
+    console.log('[Backend] IGDB credentials loaded');
   }
 });

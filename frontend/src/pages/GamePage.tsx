@@ -64,15 +64,17 @@ export function GamePage() {
     }
   }, [level?.id, session?.status, markSolved]);
 
-  const handleGuess = async () => {
+  const handleGuess = async (gameOverride?: GameSuggestion) => {
     if (!level || !session || session.status !== 'playing' || !guess.trim()) return;
+
+    const game = gameOverride ?? selectedGame;
 
     setIsSubmitting(true);
     try {
       const result = await gamesApi.guess(
         level.id,
-        guess.trim(),
-        selectedGame?.id,
+        game?.name ?? guess.trim(),
+        game?.id,
       );
 
       if (result.correct) {

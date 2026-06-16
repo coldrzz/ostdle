@@ -1,5 +1,5 @@
-import { useState, type KeyboardEvent } from 'react';
-import { gamesApi } from '@/services/gamesApi';
+import { useState } from 'react';
+import { useGameSearch } from '@/hooks/useGameSearch';
 import type { GameSuggestion } from '@/types';
 import './GameDetection.css';
 
@@ -10,41 +10,14 @@ interface AdminGameSearchProps {
 
 export function AdminGameSearch({ selectedGame, onSelect }: AdminGameSearchProps) {
   const [query, setQuery] = useState(selectedGame?.name ?? '');
-  const [suggestions, setSuggestions] = useState<GameSuggestion[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [hasSearched, setHasSearched] = useState(false);
+  const { data: suggestions = [], isLoading, isFetching } = useGameSearch(query, query.trim().length >= 2);
 
-  const runSearch = async () => {
-    const trimmed = query.trim();
-    if (trimmed.length < 2) return;
-
-    setIsLoading(true);
-    setError(null);
-    setHasSearched(true);
-
-    try {
-      const results = await gamesApi.search(trimmed);
-      setSuggestions(results);
-    } catch (e) {
-      setError(e instanceof Error ? e.message : 'Error al buscar');
-      setSuggestions([]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      void runSearch();
-    }
-  };
+  const showResults = query.trim().length >= 2;
 
   return (
     <div className="game-detection">
       <p className="admin__message" style={{ marginBottom: '1rem' }}>
-        Escribe el nombre del juego y pulsa <strong>Enter</strong> para buscar en RAWG.
+        Escribe el nombre del juego para buscar en IGDB.
       </p>
 
       <div className="admin__row">
@@ -53,19 +26,18 @@ export function AdminGameSearch({ selectedGame, onSelect }: AdminGameSearchProps
           <input
             className="admin__input"
             value={query}
-            onChange={(e) => {
-              setQuery(e.target.value);
-              setHasSearched(false);
-            }}
-            onKeyDown={handleKeyDown}
+            onChange={(e) => setQuery(e.target.value)}
             placeholder="Super Mario Galaxy 2..."
+            autoComplete="off"
+            spellCheck={false}
           />
         </div>
       </div>
 
-      {isLoading && <p className="admin__message">Buscando...</p>}
-      {error && <p className="admin__message admin__message--error">{error}</p>}
-      {hasSearched && !isLoading && suggestions.length === 0 && !error && (
+      {showResults && (isLoading || isFetching) && (
+        <p className="admin__message">Buscando...</p>
+      )}
+      {showResults && !isLoading && !isFetching && suggestions.length === 0 && (
         <p className="admin__message">Sin resultados</p>
       )}
 
