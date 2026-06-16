@@ -28,11 +28,11 @@
     "audioFile": "level_30f69425a08d.mp3"
   },
   {
-    "id": "383fea73-2aec-4402-a430-595aa171759f",
+    "id": "cbadad81-f021-4de7-b964-e8f8157c5523",
     "gameTitle": "Hades",
-    "gameId": "80529",
-    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co4rs3.jpg",
-    "audioFile": "level_4ac66b64c108.mp3"
+    "gameId": "113112",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/cob9kr.jpg",
+    "audioFile": "level_fa4e6f6db718.mp3"
   },
   {
     "id": "366ea9e2-bac4-433b-9a40-04edf48f7a64",
@@ -54,5 +54,19 @@
     "gameId": "472",
     "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/cobt0i.jpg",
     "audioFile": "level_69c903e6e12a.mp3"
+  },
+  {
+    "id": "7f622df7-1805-4440-8ccc-d41edbf62bd4",
+    "gameTitle": "The Legend of Zelda: Breath of the Wild",
+    "gameId": "7346",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co3p2d.jpg",
+    "audioFile": "level_5061382913ba.mp3"
+  },
+  {
+    "id": "48820c15-eb6a-4e5d-9dd6-bca0b3436672",
+    "gameTitle": "Final Fantasy X",
+    "gameId": "418",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1tr1.jpg",
+    "audioFile": "level_c0d812353510.mp3"
   }
 ]
