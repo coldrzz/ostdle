@@ -20,9 +20,9 @@
   --color-life-active: #c4d0aa;
   --color-life-inactive: rgba(0, 0, 0, 0.3);
 
-  /* Typography */
-  --font-primary: 'IBM Plex Sans Condensed', 'Rajdhani', system-ui, sans-serif;
-  --font-display: 'Rajdhani', 'IBM Plex Sans Condensed', system-ui, sans-serif;
+  /* Typography — Helvetica Neue (MGS3 reference) */
+  --font-primary: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-display: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
@@ -30,8 +30,8 @@
   --font-size-xl: 1.5rem;
   --font-size-2xl: 2rem;
   --font-size-3xl: 2.5rem;
-  --letter-spacing-wide: 0.12em;
-  --letter-spacing-wider: 0.2em;
+  --letter-spacing-wide: 0.08em;
+  --letter-spacing-wider: 0.12em;
 
   /* Spacing */
   --space-xs: 0.25rem;

@@ -80,7 +80,7 @@ npm run dev
 
 - Frontend: http://localhost:5173
 - Backend API: http://localhost:3001/api
-- Panel admin: http://localhost:5173/admin (solo en desarrollo)
+- Panel admin: http://localhost:5173/admin
 
 ### Servicio Python (opcional, para admin)
 
@@ -91,6 +91,24 @@ npm run dev:python
 ```
 
 Requisitos: `ffmpeg` en PATH y dependencias Python instaladas.
+
+#### Cookies de YouTube (importante)
+
+YouTube puede bloquear yt-dlp con *"Sign in to confirm you're not a bot"*. Solución: usar las cookies de tu navegador.
+
+Añade en `.env` o `backend/.env`:
+
+```
+YTDLP_COOKIES_FROM_BROWSER=chrome
+```
+
+Opciones válidas: `chrome`, `edge`, `firefox`, `brave`. Usa el navegador donde tengas sesión de YouTube abierta.
+
+Con perfil concreto: `chrome:Default` o `edge:Default`
+
+Alternativa manual: exporta `cookies.txt` y usa `YTDLP_COOKIES_FILE=./cookies.txt`
+
+Reinicia el servicio Python tras cambiar la variable.
 
 ## Mecánica del juego
 
@@ -103,13 +121,13 @@ Requisitos: `ffmpeg` en PATH y dependencias Python instaladas.
 
 ## Panel de administración
 
-Ruta: `/admin` — **solo accesible en modo desarrollo**.
+Ruta: `/admin`
 
 Permite:
 
 1. Buscar vídeos en YouTube (o pegar URL)
 2. Seleccionar fragmento con timeline visual
-3. Detectar automáticamente el videojuego (RAWG)
+3. Buscar y seleccionar el videojuego manualmente (RAWG)
 4. Generar nivel (descarga y recorta solo el fragmento)
 5. Listar, reordenar (drag & drop) y eliminar niveles
 
@@ -123,8 +141,6 @@ Permite:
 | GET | `/api/games/search?q=` | Autocompletado RAWG |
 | POST | `/api/games/guess` | Comprobar respuesta |
 | GET | `/api/health` | Health check |
-
-Rutas `/api/admin/*` bloqueadas fuera de `NODE_ENV=development`.
 
 ## Formato de niveles
 

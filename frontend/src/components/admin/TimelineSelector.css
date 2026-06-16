@@ -18,6 +18,7 @@
 
 .timeline__track {
   position: relative;
+  max-width: 420px;
   height: 48px;
   background: rgba(0, 0, 0, 0.3);
   border: var(--border-width) solid var(--color-border);

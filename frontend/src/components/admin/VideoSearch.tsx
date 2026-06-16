@@ -1,8 +1,21 @@
 import { useState } from 'react';
 import { TacticalButton } from '@/components/ui/TacticalButton';
 import { adminApi } from '@/services/adminApi';
+import { appendOstToQuery } from '@/utils/youtube';
 import type { YouTubeSearchResult } from '@/types';
 import './VideoSearch.css';
+
+function formatDuration(seconds?: number): string {
+  if (!seconds || seconds <= 0) return '—';
+  const s = Math.floor(seconds);
+  const h = Math.floor(s / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  const sec = s % 60;
+  if (h > 0) {
+    return `${h}:${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+  }
+  return `${m}:${String(sec).padStart(2, '0')}`;
+}
 
 interface VideoSearchProps {
   onSelect: (video: YouTubeSearchResult) => void;
@@ -21,7 +34,8 @@ export function VideoSearch({ onSelect, selectedUrl }: VideoSearchProps) {
     setIsSearching(true);
     setError(null);
     try {
-      const data = await adminApi.searchYouTube(query);
+      const searchQuery = appendOstToQuery(query);
+      const data = await adminApi.searchYouTube(searchQuery);
       setResults(data);
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Error al buscar');
@@ -51,7 +65,7 @@ export function VideoSearch({ onSelect, selectedUrl }: VideoSearchProps) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && void handleSearch()}
-            placeholder="Metal Gear Solid 3 OST..."
+            placeholder="Super Mario Galaxy 2..."
           />
         </div>
         <TacticalButton onClick={() => void handleSearch()} disabled={isSearching}>
@@ -88,7 +102,12 @@ export function VideoSearch({ onSelect, selectedUrl }: VideoSearchProps) {
               {video.thumbnail && (
                 <img className="video-search__thumb" src={video.thumbnail} alt="" />
               )}
-              <span className="video-search__title">{video.title}</span>
+              <div className="video-search__meta">
+                <span className="video-search__title">{video.title}</span>
+                <span className="video-search__duration">
+                  {formatDuration(video.duration)}
+                </span>
+              </div>
             </button>
           ))}
         </div>

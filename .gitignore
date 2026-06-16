@@ -3,6 +3,7 @@ dist/
 build/
 .env
 .env.local
+cookies/*.txt
 *.log
 .DS_Store
 Thumbs.db

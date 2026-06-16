@@ -5,5 +5,12 @@
     "gameId": "5230",
     "coverImage": "https://media.rawg.io/media/games/baf/bafca4a4c0e13da2bc1617b4b6d0bb21.jpg",
     "audioFile": "sample-placeholder.mp3"
+  },
+  {
+    "id": "a6fae49b-b636-41e5-8172-4d16e8e1c5f6",
+    "gameTitle": "Super Mario Galaxy 2",
+    "gameId": "27036",
+    "coverImage": "https://media.rawg.io/media/games/578/578ff52303d0e2563e28a4149f1485c2.jpeg",
+    "audioFile": "level_01b57d153e95.mp3"
   }
 ]

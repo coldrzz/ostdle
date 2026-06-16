@@ -1,8 +1,7 @@
 import { useCallback, useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { Navigate } from 'react-router-dom';
+import { AdminGameSearch } from '@/components/admin/AdminGameSearch';
 import { AdminLevelList } from '@/components/admin/AdminLevelList';
-import { GameDetection } from '@/components/admin/GameDetection';
 import { TimelineSelector } from '@/components/admin/TimelineSelector';
 import { VideoSearch } from '@/components/admin/VideoSearch';
 import { TacticalButton } from '@/components/ui/TacticalButton';
@@ -12,14 +11,6 @@ import type { GameSuggestion, YouTubeSearchResult } from '@/types';
 import './AdminPage.css';
 
 export function AdminPage() {
-  if (!import.meta.env.DEV) {
-    return <Navigate to="/" replace />;
-  }
-
-  return <AdminPageContent />;
-}
-
-function AdminPageContent() {
   const queryClient = useQueryClient();
   const { data: levels = [] } = useQuery({
     queryKey: ['levels'],
@@ -27,16 +18,15 @@ function AdminPageContent() {
   });
 
   const [selectedVideo, setSelectedVideo] = useState<YouTubeSearchResult | null>(null);
-  const [videoTitle, setVideoTitle] = useState('');
   const [startTime, setStartTime] = useState(0);
   const [endTime, setEndTime] = useState(15);
   const [selectedGame, setSelectedGame] = useState<GameSuggestion | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [generateStatus, setGenerateStatus] = useState<string | null>(null);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   const handleVideoSelect = (video: YouTubeSearchResult) => {
     setSelectedVideo(video);
-    setVideoTitle(video.title);
     setSelectedGame(null);
     setMessage(null);
   };
@@ -54,6 +44,7 @@ function AdminPageContent() {
 
     setIsGenerating(true);
     setMessage(null);
+    setGenerateStatus('Extrayendo solo el fragmento de 10 segundos (no se descarga el vídeo completo)...');
 
     try {
       await adminApi.generateLevel({
@@ -69,7 +60,6 @@ function AdminPageContent() {
       void queryClient.invalidateQueries({ queryKey: ['levels'] });
       setSelectedVideo(null);
       setSelectedGame(null);
-      setVideoTitle('');
     } catch (e) {
       setMessage({
         type: 'error',
@@ -77,15 +67,13 @@ function AdminPageContent() {
       });
     } finally {
       setIsGenerating(false);
+      setGenerateStatus(null);
     }
   };
 
   return (
     <div className="admin">
-      <h1 className="admin__title">
-        Panel de administración
-        <span className="admin__badge">Dev only</span>
-      </h1>
+      <h1 className="admin__title">Panel de administración</h1>
 
       <section className="admin__section">
         <h2 className="admin__section-title">1 — Buscar vídeo</h2>
@@ -97,22 +85,23 @@ function AdminPageContent() {
 
       {selectedVideo && (
         <>
-          <section className="admin__section">
-            <h2 className="admin__section-title">2 — Seleccionar fragmento</h2>
-            <TimelineSelector
-              videoUrl={selectedVideo.url}
-              onRangeChange={handleRangeChange}
-            />
-          </section>
+          <div className="admin__split-row">
+            <section className="admin__section">
+              <h2 className="admin__section-title">2 — Seleccionar fragmento</h2>
+              <TimelineSelector
+                videoUrl={selectedVideo.url}
+                onRangeChange={handleRangeChange}
+              />
+            </section>
 
-          <section className="admin__section">
-            <h2 className="admin__section-title">3 — Detectar videojuego</h2>
-            <GameDetection
-              videoTitle={videoTitle}
-              onSelect={setSelectedGame}
-              selectedGame={selectedGame}
-            />
-          </section>
+            <section className="admin__section">
+              <h2 className="admin__section-title">3 — Seleccionar videojuego</h2>
+              <AdminGameSearch
+                selectedGame={selectedGame}
+                onSelect={setSelectedGame}
+              />
+            </section>
+          </div>
 
           <section className="admin__section">
             <h2 className="admin__section-title">4 — Generar nivel</h2>
@@ -131,8 +120,11 @@ function AdminPageContent() {
               onClick={() => void handleGenerate()}
               disabled={isGenerating || !selectedGame}
             >
-              {isGenerating ? 'Generando...' : 'Generar nivel'}
+              {isGenerating ? 'Extrayendo fragmento...' : 'Generar nivel'}
             </TacticalButton>
+            {generateStatus && (
+              <p className="admin__message admin__message--progress">{generateStatus}</p>
+            )}
             {message && (
               <p className={`admin__message admin__message--${message.type}`}>
                 {message.text}

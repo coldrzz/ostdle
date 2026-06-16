@@ -1,8 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { TacticalButton } from '@/components/ui/TacticalButton';
+import { YouTubePlayer } from '@/components/admin/YouTubePlayer';
 import { adminApi } from '@/services/adminApi';
+import { extractYouTubeId } from '@/utils/youtube';
 import type { YouTubeVideoInfo } from '@/types';
 import './TimelineSelector.css';
+
+const CLIP_LENGTH = 10;
 
 function formatTime(seconds: number): string {
   const s = Math.floor(seconds);
@@ -18,46 +22,85 @@ function parseTimeInput(value: string): number {
   return parseFloat(value) || 0;
 }
 
+function clampStart(start: number, videoDuration: number): number {
+  const maxStart = Math.max(0, videoDuration - CLIP_LENGTH);
+  return Math.max(0, Math.min(start, maxStart));
+}
+
+function computeEnd(start: number, videoDuration: number): number {
+  if (videoDuration > 0) {
+    return Math.min(start + CLIP_LENGTH, videoDuration);
+  }
+  return start + CLIP_LENGTH;
+}
+
 interface TimelineSelectorProps {
   videoUrl: string;
   onRangeChange: (start: number, end: number) => void;
 }
 
 export function TimelineSelector({ videoUrl, onRangeChange }: TimelineSelectorProps) {
-  const videoRef = useRef<HTMLVideoElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const [videoInfo, setVideoInfo] = useState<YouTubeVideoInfo | null>(null);
-  const [streamUrl, setStreamUrl] = useState<string | null>(null);
+  const [videoId, setVideoId] = useState<string | null>(null);
   const [startTime, setStartTime] = useState(0);
-  const [endTime, setEndTime] = useState(15);
+  const [endTime, setEndTime] = useState(CLIP_LENGTH);
   const [currentTime, setCurrentTime] = useState(0);
-  const [dragging, setDragging] = useState<'start' | 'end' | null>(null);
+  const [dragging, setDragging] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
+  const [previewClip, setPreviewClip] = useState(false);
   const [startInput, setStartInput] = useState('00:00');
-  const [endInput, setEndInput] = useState('00:15');
 
   const duration = videoInfo?.duration ?? 0;
+
+  const applyStart = useCallback(
+    (rawStart: number) => {
+      const clamped = clampStart(rawStart, duration);
+      const end = computeEnd(clamped, duration);
+      setStartTime(clamped);
+      setEndTime(end);
+      setStartInput(formatTime(clamped));
+      setPreviewClip(false);
+    },
+    [duration],
+  );
 
   useEffect(() => {
     if (!videoUrl) return;
 
     setLoading(true);
     setError(null);
+    setPreviewClip(false);
 
     void (async () => {
       try {
         const info = await adminApi.getVideoInfo(videoUrl);
         setVideoInfo(info);
-        const end = Math.min(15, info.duration);
+        const id = info.id || extractYouTubeId(videoUrl);
+        setVideoId(id);
+        const start = 0;
+        const end = computeEnd(start, info.duration || CLIP_LENGTH);
+        setStartTime(start);
         setEndTime(end);
-        setEndInput(formatTime(end));
-
-        const stream = await adminApi.getStreamUrl(videoUrl);
-        setStreamUrl(stream.streamUrl);
+        setStartInput(formatTime(start));
       } catch (e) {
-        setError(e instanceof Error ? e.message : 'Error al cargar vídeo');
+        const id = extractYouTubeId(videoUrl);
+        if (id) {
+          setVideoId(id);
+          setVideoInfo({
+            id,
+            title: 'Vídeo de YouTube',
+            duration: 600,
+            thumbnail: `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`,
+            url: videoUrl,
+          });
+          setStartTime(0);
+          setEndTime(CLIP_LENGTH);
+          setStartInput('00:00');
+        } else {
+          setError(e instanceof Error ? e.message : 'Error al cargar vídeo');
+        }
       } finally {
         setLoading(false);
       }
@@ -79,12 +122,11 @@ export function TimelineSelector({ videoUrl, onRangeChange }: TimelineSelectorPr
   );
 
   const handleTrackClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!trackRef.current || !videoRef.current) return;
+    if (!trackRef.current) return;
     const rect = trackRef.current.getBoundingClientRect();
     const percent = ((e.clientX - rect.left) / rect.width) * 100;
-    const time = percentToTime(percent);
-    videoRef.current.currentTime = time;
-    setCurrentTime(time);
+    applyStart(percentToTime(percent));
+    setCurrentTime(percentToTime(percent));
   };
 
   const handleMouseMove = useCallback(
@@ -92,22 +134,12 @@ export function TimelineSelector({ videoUrl, onRangeChange }: TimelineSelectorPr
       if (!dragging || !trackRef.current) return;
       const rect = trackRef.current.getBoundingClientRect();
       const percent = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
-      const time = percentToTime(percent);
-
-      if (dragging === 'start') {
-        const newStart = Math.min(time, endTime - 1);
-        setStartTime(newStart);
-        setStartInput(formatTime(newStart));
-      } else {
-        const newEnd = Math.max(time, startTime + 1);
-        setEndTime(newEnd);
-        setEndInput(formatTime(newEnd));
-      }
+      applyStart(percentToTime(percent));
     },
-    [dragging, endTime, startTime, percentToTime],
+    [dragging, applyStart, percentToTime],
   );
 
-  const handleMouseUp = useCallback(() => setDragging(null), []);
+  const handleMouseUp = useCallback(() => setDragging(false), []);
 
   useEffect(() => {
     if (dragging) {
@@ -120,17 +152,9 @@ export function TimelineSelector({ videoUrl, onRangeChange }: TimelineSelectorPr
     }
   }, [dragging, handleMouseMove, handleMouseUp]);
 
-  const previewSelection = () => {
-    if (!videoRef.current) return;
-    videoRef.current.currentTime = startTime;
-    void videoRef.current.play();
-    const clipDuration = (endTime - startTime) * 1000;
-    setTimeout(() => videoRef.current?.pause(), clipDuration);
-  };
-
   if (loading) return <p className="admin__message">Cargando vídeo...</p>;
   if (error) return <p className="admin__message admin__message--error">{error}</p>;
-  if (!videoInfo) return null;
+  if (!videoInfo || !videoId) return null;
 
   return (
     <div className="timeline">
@@ -138,15 +162,12 @@ export function TimelineSelector({ videoUrl, onRangeChange }: TimelineSelectorPr
         <strong>{videoInfo.title}</strong> — Duración: {formatTime(duration)}
       </p>
 
-      {streamUrl && (
-        <video
-          ref={videoRef}
-          className="timeline__video"
-          src={streamUrl}
-          onTimeUpdate={() => setCurrentTime(videoRef.current?.currentTime ?? 0)}
-          controls
-        />
-      )}
+      <YouTubePlayer
+        videoId={videoId}
+        start={previewClip ? startTime : undefined}
+        end={previewClip ? endTime : undefined}
+        autoplay={previewClip}
+      />
 
       <div
         ref={trackRef}
@@ -171,20 +192,10 @@ export function TimelineSelector({ videoUrl, onRangeChange }: TimelineSelectorPr
           style={{ left: `${timeToPercent(startTime)}%` }}
           onMouseDown={(e) => {
             e.stopPropagation();
-            setDragging('start');
+            setDragging(true);
           }}
           role="slider"
           aria-label="Inicio del fragmento"
-        />
-        <div
-          className="timeline__handle"
-          style={{ left: `${timeToPercent(endTime)}%` }}
-          onMouseDown={(e) => {
-            e.stopPropagation();
-            setDragging('end');
-          }}
-          role="slider"
-          aria-label="Fin del fragmento"
         />
       </div>
 
@@ -195,11 +206,10 @@ export function TimelineSelector({ videoUrl, onRangeChange }: TimelineSelectorPr
             className="admin__input"
             value={startInput}
             onChange={(e) => setStartInput(e.target.value)}
-            onBlur={() => {
-              const t = parseTimeInput(startInput);
-              if (t < endTime) {
-                setStartTime(t);
-                setStartInput(formatTime(t));
+            onBlur={() => applyStart(parseTimeInput(startInput))}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                applyStart(parseTimeInput(startInput));
               }
             }}
           />
@@ -207,22 +217,19 @@ export function TimelineSelector({ videoUrl, onRangeChange }: TimelineSelectorPr
         <div className="admin__field">
           <label className="admin__label">Hasta</label>
           <input
-            className="admin__input"
-            value={endInput}
-            onChange={(e) => setEndInput(e.target.value)}
-            onBlur={() => {
-              const t = parseTimeInput(endInput);
-              if (t > startTime && t <= duration) {
-                setEndTime(t);
-                setEndInput(formatTime(t));
-              }
-            }}
+            className="admin__input admin__input--readonly"
+            value={formatTime(endTime)}
+            readOnly
+            tabIndex={-1}
+            aria-readonly="true"
           />
         </div>
         <div className="timeline__time-display">
-          {formatTime(endTime - startTime)} seleccionados
+          {CLIP_LENGTH} seg fijos
         </div>
-        <TacticalButton onClick={previewSelection}>Previsualizar</TacticalButton>
+        <TacticalButton onClick={() => setPreviewClip(true)}>
+          Previsualizar fragmento
+        </TacticalButton>
       </div>
     </div>
   );

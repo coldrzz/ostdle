@@ -79,6 +79,7 @@ export interface YouTubeVideoInfo {
   duration: number;
   thumbnail: string;
   url: string;
+  embedUrl?: string;
 }
 
 export interface YouTubeSearchResult {

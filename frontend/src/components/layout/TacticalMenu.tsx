@@ -6,17 +6,13 @@ interface MenuItem {
   id: string;
   label: string;
   path: string;
-  devOnly?: boolean;
 }
 
 const MENU_ITEMS: MenuItem[] = [
   { id: 'home', label: 'Inicio', path: '/' },
   { id: 'daily', label: 'Nivel del día', path: '/play/daily' },
   { id: 'archive', label: 'Niveles anteriores', path: '/levels' },
-];
-
-const DEV_MENU_ITEMS: MenuItem[] = [
-  { id: 'admin', label: 'Administración', path: '/admin', devOnly: true },
+  { id: 'admin', label: 'Administración', path: '/admin' },
 ];
 
 interface TacticalMenuProps {
@@ -27,13 +23,8 @@ export function TacticalMenu({ extraItems = [] }: TacticalMenuProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const { playHover, playClick } = useSoundEffects();
-  const isDev = import.meta.env.DEV;
 
-  const items = [
-    ...MENU_ITEMS,
-    ...(isDev ? DEV_MENU_ITEMS : []),
-    ...extraItems,
-  ];
+  const items = [...MENU_ITEMS, ...extraItems];
 
   return (
     <nav className="tactical-menu" aria-label="Navegación principal">

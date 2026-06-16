@@ -1,10 +1,17 @@
 """OSTdle Python Media Service - YouTube search, streaming, and audio extraction."""
 
 import os
-import sys
+from pathlib import Path
 
+from dotenv import load_dotenv
 from flask import Flask, jsonify, request, redirect
 from flask_cors import CORS
+
+# Load .env from project root and python-service/
+_root = Path(__file__).resolve().parent.parent
+load_dotenv(_root / ".env")
+load_dotenv(_root / "backend" / ".env")
+load_dotenv(Path(__file__).resolve().parent / ".env")
 
 from media_service import (
     extract_audio_fragment,
@@ -99,5 +106,34 @@ def audio_extract():
 
 
 if __name__ == "__main__":
+    import shutil
+
+    from media_service import _find_ffmpeg, _js_runtime_opts
+
+    cookies_browser = os.environ.get("YTDLP_COOKIES_FROM_BROWSER", "")
+    cookies_file = os.environ.get("YTDLP_COOKIES_FILE", "")
     print(f"[Python Service] Starting on port {PORT}")
+    try:
+        print(f"[Python Service] ffmpeg: {_find_ffmpeg()}")
+    except RuntimeError as e:
+        print(f"[Python Service] WARNING: {e}")
+    js_opts = _js_runtime_opts()
+    if js_opts:
+        runtime = next(iter(js_opts.get("js_runtimes", {})))
+        path = js_opts["js_runtimes"][runtime].get("path") or shutil.which(runtime)
+        print(f"[Python Service] JS runtime: {runtime} ({path})")
+    else:
+        print("[Python Service] WARNING: No JS runtime for YouTube (install Node.js 22+)")
+    try:
+        import yt_dlp_ejs  # noqa: F401
+        print("[Python Service] yt-dlp-ejs: OK")
+    except ImportError:
+        print("[Python Service] WARNING: yt-dlp-ejs missing. Run: pip install -U \"yt-dlp[default]\"")
+    if cookies_browser:
+        print(f"[Python Service] YouTube cookies from browser: {cookies_browser}")
+    elif cookies_file:
+        print(f"[Python Service] YouTube cookies file: {cookies_file}")
+    else:
+        print("[Python Service] WARNING: No YouTube cookies configured.")
+        print("  Set YTDLP_COOKIES_FROM_BROWSER=chrome (or edge) in .env")
     app.run(host="0.0.0.0", port=PORT, debug=os.environ.get("FLASK_DEBUG") == "1")

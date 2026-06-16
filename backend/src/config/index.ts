@@ -1,8 +1,13 @@
+import dotenv from 'dotenv';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Load env before reading process.env (backend/.env takes priority over root .env)
+dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 export const config = {
   port: parseInt(process.env.PORT ?? '3001', 10),

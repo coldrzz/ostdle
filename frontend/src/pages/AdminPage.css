@@ -65,6 +65,12 @@
   border-color: var(--color-accent-dim);
 }
 
+.admin__input--readonly {
+  opacity: 0.7;
+  cursor: default;
+  background: rgba(0, 0, 0, 0.1);
+}
+
 .admin__label {
   display: block;
   font-size: var(--font-size-xs);
@@ -91,4 +97,21 @@
 
 .admin__message--success {
   color: var(--color-success);
+}
+
+.admin__message--progress {
+  color: var(--color-accent);
+}
+
+.admin__split-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+@media (max-width: 960px) {
+  .admin__split-row {
+    grid-template-columns: 1fr;
+  }
 }
