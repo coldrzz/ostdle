@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import type { GameSession, GameStatus, GuessResponse } from '@/types';
-import { INITIAL_CLIP_DURATION, INITIAL_LIVES } from '@/types';
+import { getClipDurationForLives, INITIAL_LIVES } from '@/types';
 
 interface GameStore {
   session: GameSession | null;
@@ -19,7 +19,7 @@ function createInitialSession(levelId: string): GameSession {
     attempts: 0,
     wrongGuesses: 0,
     skips: 0,
-    clipDuration: INITIAL_CLIP_DURATION,
+    clipDuration: getClipDurationForLives(INITIAL_LIVES),
     livesRemaining: INITIAL_LIVES,
     status: 'playing',
     revealedAnswer: false,
@@ -45,12 +45,13 @@ export const useGameStore = create<GameStore>((set) => ({
     set((state) => {
       if (!state.session || state.session.status !== 'playing') return state;
 
+      const livesRemaining = state.session.livesRemaining - 1;
       const session: GameSession = {
         ...state.session,
         attempts: state.session.attempts + 1,
         wrongGuesses: state.session.wrongGuesses + 1,
-        clipDuration: state.session.clipDuration + 1,
-        livesRemaining: state.session.livesRemaining - 1,
+        clipDuration: getClipDurationForLives(livesRemaining),
+        livesRemaining,
       };
 
       if (isGameOver(session)) {
@@ -67,12 +68,13 @@ export const useGameStore = create<GameStore>((set) => ({
     set((state) => {
       if (!state.session || state.session.status !== 'playing') return state;
 
+      const livesRemaining = state.session.livesRemaining - 1;
       const session: GameSession = {
         ...state.session,
         attempts: state.session.attempts + 1,
         skips: state.session.skips + 1,
-        clipDuration: state.session.clipDuration + 1,
-        livesRemaining: state.session.livesRemaining - 1,
+        clipDuration: getClipDurationForLives(livesRemaining),
+        livesRemaining,
       };
 
       if (isGameOver(session)) {

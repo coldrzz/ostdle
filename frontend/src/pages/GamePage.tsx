@@ -164,7 +164,7 @@ export function GamePage() {
           <div className="game-page__actions">
             <TacticalButton
               variant="primary"
-              onClick={handleGuess}
+              onClick={() => void handleGuess()}
               disabled={!canGuess}
             >
               Adivinar

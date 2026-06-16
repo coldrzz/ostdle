@@ -73,5 +73,10 @@ export interface GameSession {
 }
 
 export const INITIAL_LIVES = 5;
-export const MAX_WRONG_GUESSES = 3;
-export const INITIAL_CLIP_DURATION = 1;
+export const CLIP_DURATIONS = [1, 2, 4, 7, 10] as const;
+
+export function getClipDurationForLives(livesRemaining: number): number {
+  const livesLost = INITIAL_LIVES - livesRemaining;
+  const index = Math.min(Math.max(livesLost, 0), CLIP_DURATIONS.length - 1);
+  return CLIP_DURATIONS[index];
+}

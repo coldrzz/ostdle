@@ -28,18 +28,18 @@
     "audioFile": "level_30f69425a08d.mp3"
   },
   {
-    "id": "cbadad81-f021-4de7-b964-e8f8157c5523",
-    "gameTitle": "Hades",
-    "gameId": "113112",
-    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/cob9kr.jpg",
-    "audioFile": "level_fa4e6f6db718.mp3"
-  },
-  {
     "id": "366ea9e2-bac4-433b-9a40-04edf48f7a64",
     "gameTitle": "Bloodborne",
     "gameId": "7334",
     "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/cob99l.jpg",
     "audioFile": "level_2fdeb075bcab.mp3"
+  },
+  {
+    "id": "cbadad81-f021-4de7-b964-e8f8157c5523",
+    "gameTitle": "Hades",
+    "gameId": "113112",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/cob9kr.jpg",
+    "audioFile": "level_fa4e6f6db718.mp3"
   },
   {
     "id": "c952a6a5-579a-4147-bb39-293aac73cb15",
@@ -68,5 +68,264 @@
     "gameId": "418",
     "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1tr1.jpg",
     "audioFile": "level_c0d812353510.mp3"
+  },
+  {
+    "id": "81152c22-eee1-432b-85d7-59cc461306fe",
+    "gameTitle": "Crash Bandicoot",
+    "gameId": "1185",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co555l.jpg",
+    "audioFile": "level_614b712e7fcd.mp3"
+  },
+  {
+    "id": "89d4bde3-9603-47f1-a891-2605f0b4b1a8",
+    "gameTitle": "Stardew Valley",
+    "gameId": "17000",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/coa93h.jpg",
+    "audioFile": "level_10fa7e3754e5.mp3"
+  },
+  {
+    "id": "89bd30d6-3a9b-4c36-8b5d-bcf98d366d1d",
+    "gameTitle": "Portal",
+    "gameId": "71",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/coay61.jpg",
+    "audioFile": "level_23adade7d115.mp3"
+  },
+  {
+    "id": "613cb4ef-380c-48d9-bab0-8ceb4cbc0d02",
+    "gameTitle": "Mario Kart Wii",
+    "gameId": "2183",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co214e.jpg",
+    "audioFile": "level_347882326791.mp3"
+  },
+  {
+    "id": "362f3f32-f229-47be-a613-663f3501ee8b",
+    "gameTitle": "Doom",
+    "gameId": "7351",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1nc7.jpg",
+    "audioFile": "level_dcd6022ecd40.mp3"
+  },
+  {
+    "id": "3d4fb806-b91f-4a9f-a918-49b37ad5f2d1",
+    "gameTitle": "Silent Hill 2",
+    "gameId": "222341",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/coavaf.jpg",
+    "audioFile": "level_024bb34512a3.mp3"
+  },
+  {
+    "id": "4491c44a-1363-427f-b65c-2242f6c62a3d",
+    "gameTitle": "Sonic Frontiers",
+    "gameId": "150010",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co5p52.jpg",
+    "audioFile": "level_3784aac859cb.mp3"
+  },
+  {
+    "id": "73efd8be-7051-4389-a353-993de92c734b",
+    "gameTitle": "Undertale",
+    "gameId": "12517",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/cob1t2.jpg",
+    "audioFile": "level_b6b90e6539c8.mp3"
+  },
+  {
+    "id": "bd75d327-7b80-4cae-9eb0-a89f7c1f4576",
+    "gameTitle": "Metal Gear Solid 4: Guns of the Patriots",
+    "gameId": "380",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co5eju.jpg",
+    "audioFile": "level_592f88eaea48.mp3"
+  },
+  {
+    "id": "bf613bef-cdf0-4b68-b0ce-97f4063ce3f8",
+    "gameTitle": "Devil May Cry 3: Dante's Awakening",
+    "gameId": "136",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1u6u.jpg",
+    "audioFile": "level_e07f8f62e378.mp3"
+  },
+  {
+    "id": "5df82062-5f4d-42af-8de8-63aa65fc5f7e",
+    "gameTitle": "Donkey Kong Country",
+    "gameId": "1090",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co70qn.jpg",
+    "audioFile": "level_36b51d606f77.mp3"
+  },
+  {
+    "id": "3264e2c8-1385-4fb4-8ecf-ab2234d60d7b",
+    "gameTitle": "Super Meat Boy",
+    "gameId": "885",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co276m.jpg",
+    "audioFile": "level_0b1e2706aff0.mp3"
+  },
+  {
+    "id": "f3ec0f34-3bef-483a-8b52-b175719474b9",
+    "gameTitle": "Elden Ring",
+    "gameId": "119133",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co4jni.jpg",
+    "audioFile": "level_daeee2120cbd.mp3"
+  },
+  {
+    "id": "cd58b5ca-fe46-4b98-97c0-8cca0969d5bd",
+    "gameTitle": "Super Mario 3D Land",
+    "gameId": "1079",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/cobab1.jpg",
+    "audioFile": "level_a23e9d54f202.mp3"
+  },
+  {
+    "id": "d592258d-a95e-4fee-8e39-8c360a3aff6d",
+    "gameTitle": "God of War II",
+    "gameId": "551",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co3dik.jpg",
+    "audioFile": "level_4b765b373c55.mp3"
+  },
+  {
+    "id": "5a18aaea-98bd-4fd0-a655-4f702de5a460",
+    "gameTitle": "Shovel Knight",
+    "gameId": "7444",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/cobaa7.jpg",
+    "audioFile": "level_c0f6fe7994cd.mp3"
+  },
+  {
+    "id": "f8bfe3e3-a42f-45e9-b127-6ce62ded28c3",
+    "gameTitle": "Pokémon Go",
+    "gameId": "12515",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co9gmb.jpg",
+    "audioFile": "level_fa17c98ac878.mp3"
+  },
+  {
+    "id": "e51562fd-4337-429f-8521-f8b8486b12f0",
+    "gameTitle": "The Witcher 3: Wild Hunt",
+    "gameId": "1942",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/coaarl.jpg",
+    "audioFile": "level_f1144fa8d239.mp3"
+  },
+  {
+    "id": "c12476ff-5dfb-43fc-b1ea-394eef685f87",
+    "gameTitle": "Hollow Knight",
+    "gameId": "14593",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/cobfzp.jpg",
+    "audioFile": "level_a050e3d5a9d7.mp3"
+  },
+  {
+    "id": "9fa35684-c5dd-4a56-8aa8-83aecc647098",
+    "gameTitle": "The Last of Us",
+    "gameId": "1009",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1r7f.jpg",
+    "audioFile": "level_85118c7332a8.mp3"
+  },
+  {
+    "id": "3f9931af-ebc6-4f96-b68e-307d126f7902",
+    "gameTitle": "Final Fantasy VII Remake",
+    "gameId": "11169",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/cobcwt.jpg",
+    "audioFile": "level_2ce33caccab5.mp3"
+  },
+  {
+    "id": "09d3441f-7c70-44ad-aa43-e9540729061a",
+    "gameTitle": "Tetris Effect: Connected",
+    "gameId": "135999",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co7kus.jpg",
+    "audioFile": "level_7231b1e7a416.mp3"
+  },
+  {
+    "id": "cb0ac3d9-4465-4ddb-b6f4-acb04afd0edf",
+    "gameTitle": "Hotline Miami",
+    "gameId": "1384",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1vqp.jpg",
+    "audioFile": "level_9857985d317a.mp3"
+  },
+  {
+    "id": "0905d435-2634-456e-8c3e-4cdb9637420e",
+    "gameTitle": "The Legend of Zelda: Ocarina of Time",
+    "gameId": "1029",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co3nnx.jpg",
+    "audioFile": "level_8a5b7aee3812.mp3"
+  },
+  {
+    "id": "2394af68-ce27-40ca-b68b-00a259720303",
+    "gameTitle": "Sonic Adventure 2",
+    "gameId": "7858",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/cobqpd.jpg",
+    "audioFile": "level_9011ea134612.mp3"
+  },
+  {
+    "id": "d6ff06d7-8404-4ad2-b0d1-32a5446d397b",
+    "gameTitle": "Resident Evil 7: Biohazard",
+    "gameId": "19562",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/cobtwh.jpg",
+    "audioFile": "level_929d26f0a2a4.mp3"
+  },
+  {
+    "id": "470c0463-2b1c-4688-a402-14231fc5b9ce",
+    "gameTitle": "Super Mario 64",
+    "gameId": "1074",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co721v.jpg",
+    "audioFile": "level_31a2cc2372fb.mp3"
+  },
+  {
+    "id": "948c303a-b72c-4e4a-954c-c4ad04035e12",
+    "gameTitle": "Black Mesa",
+    "gameId": "6739",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co20n4.jpg",
+    "audioFile": "level_7c4baffc8d68.mp3"
+  },
+  {
+    "id": "0c026986-1805-4fce-9407-a54afa503f43",
+    "gameTitle": "Persona 5",
+    "gameId": "9927",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1r76.jpg",
+    "audioFile": "level_0a6dd67d6212.mp3"
+  },
+  {
+    "id": "b8c58e6d-ce70-40ac-9037-1171791b51ea",
+    "gameTitle": "Blasphemous II",
+    "gameId": "165390",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co6ej3.jpg",
+    "audioFile": "level_4c6f9a569214.mp3"
+  },
+  {
+    "id": "cb3a4009-19d2-46fb-bdeb-37a8d31b0d28",
+    "gameTitle": "Inazuma Eleven",
+    "gameId": "22688",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2ukm.jpg",
+    "audioFile": "level_acd4a1dc146e.mp3"
+  },
+  {
+    "id": "ad957365-2d34-4bb5-910b-6836451fc15f",
+    "gameTitle": "Metal Gear Solid",
+    "gameId": "375",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/cobpak.jpg",
+    "audioFile": "level_707a89acb606.mp3"
+  },
+  {
+    "id": "02b89f05-17af-4cbb-9ced-5f50c680e351",
+    "gameTitle": "Phasmophobia",
+    "gameId": "132516",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/coamcz.jpg",
+    "audioFile": "level_a1c6e99152ca.mp3"
+  },
+  {
+    "id": "4c898bd0-7ae5-4057-b144-6ead599f2b60",
+    "gameTitle": "Super Smash Bros. Brawl",
+    "gameId": "1628",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co221w.jpg",
+    "audioFile": "level_a452c5073b4b.mp3"
+  },
+  {
+    "id": "5dd94caa-53a3-4d16-adfb-eaad7ad77d38",
+    "gameTitle": "Xenoblade Chronicles",
+    "gameId": "2364",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/coc8ap.jpg",
+    "audioFile": "level_0fec8df8389e.mp3"
+  },
+  {
+    "id": "10c9a370-4a2e-431b-9d8b-0594e454c495",
+    "gameTitle": "Little Nightmares II",
+    "gameId": "121760",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/coa17l.jpg",
+    "audioFile": "level_61906b6c9a32.mp3"
+  },
+  {
+    "id": "85161c1f-e064-4931-b99b-277cb32f2c35",
+    "gameTitle": "Clash of Clans",
+    "gameId": "5589",
+    "coverImage": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1mb8.jpg",
+    "audioFile": "level_514005b3609f.mp3"
   }
 ]
