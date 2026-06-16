@@ -1,16 +1,58 @@
 [
   {
-    "id": "1",
-    "gameTitle": "Metal Gear Solid 3: Snake Eater",
-    "gameId": "5230",
-    "coverImage": "https://media.rawg.io/media/games/baf/bafca4a4c0e13da2bc1617b4b6d0bb21.jpg",
-    "audioFile": "sample-placeholder.mp3"
-  },
-  {
     "id": "a6fae49b-b636-41e5-8172-4d16e8e1c5f6",
     "gameTitle": "Super Mario Galaxy 2",
     "gameId": "27036",
     "coverImage": "https://media.rawg.io/media/games/578/578ff52303d0e2563e28a4149f1485c2.jpeg",
     "audioFile": "level_01b57d153e95.mp3"
+  },
+  {
+    "id": "46d87d02-172a-4c5f-a566-b5b012768cde",
+    "gameTitle": "Subnautica",
+    "gameId": "10419",
+    "coverImage": "https://media.rawg.io/media/games/739/73990e3ec9f43a9e8ecafe207fa4f368.jpg",
+    "audioFile": "level_4e66fa0eb1cb.mp3"
+  },
+  {
+    "id": "bd18d0a0-5fbf-4961-b5b1-5ef6516a0675",
+    "gameTitle": "Red Dead Redemption 2",
+    "gameId": "28",
+    "coverImage": "https://media.rawg.io/media/games/511/5118aff5091cb3efec399c808f8c598f.jpg",
+    "audioFile": "level_09eb5b61af16.mp3"
+  },
+  {
+    "id": "037ca774-a45e-4c92-8349-da3fe2d84536",
+    "gameTitle": "Cuphead",
+    "gameId": "28154",
+    "coverImage": "https://media.rawg.io/media/games/226/2262cea0b385db6cf399f4be831603b0.jpg",
+    "audioFile": "level_30f69425a08d.mp3"
+  },
+  {
+    "id": "383fea73-2aec-4402-a430-595aa171759f",
+    "gameTitle": "Hades",
+    "gameId": "274755",
+    "coverImage": "https://media.rawg.io/media/games/1f4/1f47a270b8f241e4676b14d39ec620f7.jpg",
+    "audioFile": "level_4ac66b64c108.mp3"
+  },
+  {
+    "id": "366ea9e2-bac4-433b-9a40-04edf48f7a64",
+    "gameTitle": "Bloodborne",
+    "gameId": "3387",
+    "coverImage": "https://media.rawg.io/media/games/214/214b29aeff13a0ae6a70fc4426e85991.jpg",
+    "audioFile": "level_2fdeb075bcab.mp3"
+  },
+  {
+    "id": "c952a6a5-579a-4147-bb39-293aac73cb15",
+    "gameTitle": "Minecraft",
+    "gameId": "22509",
+    "coverImage": "https://media.rawg.io/media/games/b4e/b4e4c73d5aa4ec66bbf75375c4847a2b.jpg",
+    "audioFile": "level_7963c8ff817f.mp3"
+  },
+  {
+    "id": "0d6c2ded-7374-4a26-8546-d357c591e287",
+    "gameTitle": "The Elder Scrolls V: Skyrim",
+    "gameId": "5679",
+    "coverImage": "https://media.rawg.io/media/games/7cf/7cfc9220b401b7a300e409e539c9afd5.jpg",
+    "audioFile": "level_69c903e6e12a.mp3"
   }
 ]

@@ -12,6 +12,7 @@ import { gamesApi } from '@/services/gamesApi';
 import { getAudioUrl } from '@/services/api';
 import { levelsApi } from '@/services/levelsApi';
 import { useGameStore } from '@/store/gameStore';
+import { useProgressStore } from '@/store/progressStore';
 import type { GameSuggestion } from '@/types';
 import './GamePage.css';
 
@@ -33,6 +34,7 @@ export function GamePage() {
   const recordSkip = useGameStore((s) => s.recordSkip);
   const recordWin = useGameStore((s) => s.recordWin);
   const reset = useGameStore((s) => s.reset);
+  const markSolved = useProgressStore((s) => s.markSolved);
 
   const levelQuery = useQuery({
     queryKey: ['levels', isDaily ? 'daily' : levelParam],
@@ -52,6 +54,15 @@ export function GamePage() {
     }
     return () => reset();
   }, [level?.id, initSession, reset]);
+
+  useEffect(() => {
+    if (!level || !session) return;
+    if (session.status === 'won') {
+      markSolved(level.id, 'won');
+    } else if (session.status === 'lost') {
+      markSolved(level.id, 'lost');
+    }
+  }, [level?.id, session?.status, markSolved]);
 
   const handleGuess = async () => {
     if (!level || !session || session.status !== 'playing' || !guess.trim()) return;
