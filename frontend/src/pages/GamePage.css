@@ -36,6 +36,16 @@
   justify-content: center;
 }
 
+.game-page__play-row {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 560px;
+}
+
 .game-page__input-section {
   width: 100%;
   max-width: 500px;
@@ -49,6 +59,15 @@
   gap: var(--space-md);
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.game-page__nav-actions {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border);
 }
 
 .game-page__loading,

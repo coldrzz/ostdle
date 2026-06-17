@@ -66,6 +66,7 @@ export interface GameSession {
   attempts: number;
   wrongGuesses: number;
   skips: number;
+  wrongGuessHistory: string[];
   clipDuration: number;
   livesRemaining: number;
   status: GameStatus;
@@ -74,6 +75,7 @@ export interface GameSession {
 
 export const INITIAL_LIVES = 5;
 export const CLIP_DURATIONS = [1, 2, 4, 7, 10] as const;
+export const LEVEL_AUDIO_DURATION = 10;
 
 export function getClipDurationForLives(livesRemaining: number): number {
   const livesLost = INITIAL_LIVES - livesRemaining;

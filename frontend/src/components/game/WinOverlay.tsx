@@ -1,14 +1,16 @@
 import { motion } from 'framer-motion';
+import { FullClipPlayer } from '@/components/game/FullClipPlayer';
 import { TacticalButton } from '@/components/ui/TacticalButton';
 import type { GuessResponse } from '@/types';
 import './ResultOverlay.css';
 
 interface WinOverlayProps {
   result: GuessResponse;
+  audioSrc: string;
   onNext: () => void;
 }
 
-export function WinOverlay({ result, onNext }: WinOverlayProps) {
+export function WinOverlay({ result, audioSrc, onNext }: WinOverlayProps) {
   return (
     <motion.div
       className="result-overlay"
@@ -39,6 +41,8 @@ export function WinOverlay({ result, onNext }: WinOverlayProps) {
       ) : (
         <div className="result-overlay__cover result-overlay__cover--placeholder">?</div>
       )}
+
+      <FullClipPlayer audioSrc={audioSrc} />
 
       <h2 className="result-overlay__title">{result.gameTitle}</h2>
 

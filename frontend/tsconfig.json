@@ -22,5 +22,10 @@
     }
   },
   "include": ["src"],
+  "exclude": [
+    "src/pages/AdminPage.tsx",
+    "src/components/admin",
+    "src/services/adminApi.ts"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

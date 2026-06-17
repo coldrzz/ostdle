@@ -1,14 +1,38 @@
-import { api } from './api';
 import type { DailyLevelResponse, Level } from '@/types';
+import {
+  getAllLevels,
+  getDailyLevel,
+  getLevelById,
+  getLevelByNumber,
+} from './levelsData';
+
+export class LevelNotFoundError extends Error {
+  constructor(message = 'Level not found') {
+    super(message);
+    this.name = 'LevelNotFoundError';
+  }
+}
 
 export const levelsApi = {
-  getAll: () => api.get<Level[]>('/levels'),
-  getById: (id: string) => api.get<Level>(`/levels/${id}`),
-  getDaily: () => api.get<DailyLevelResponse>('/levels/daily'),
-  getByNumber: (number: number) =>
-    api.get<{ level: Level; levelNumber: number }>(`/levels/number/${number}`),
-  create: (data: Omit<Level, 'id'>) => api.post<Level>('/levels', data),
-  update: (id: string, data: Partial<Level>) => api.put<Level>(`/levels/${id}`, data),
-  delete: (id: string) => api.delete(`/levels/${id}`),
-  reorder: (orderedIds: string[]) => api.put<Level[]>('/levels/reorder/all', { orderedIds }),
+  getAll: () => getAllLevels(),
+
+  getById: async (id: string) => {
+    const level = await getLevelById(id);
+    if (!level) throw new LevelNotFoundError();
+    return level;
+  },
+
+  getDaily: async () => {
+    const daily = await getDailyLevel();
+    if (!daily) throw new LevelNotFoundError('Daily level not found');
+    return daily;
+  },
+
+  getByNumber: async (number: number) => {
+    const result = await getLevelByNumber(number);
+    if (!result) throw new LevelNotFoundError();
+    return result;
+  },
 };
+
+export type { DailyLevelResponse, Level };

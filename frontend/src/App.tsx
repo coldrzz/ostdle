@@ -6,7 +6,6 @@ import { TacticalMenu } from '@/components/layout/TacticalMenu';
 import { HomePage } from '@/pages/HomePage';
 import { GamePage } from '@/pages/GamePage';
 import { PreviousLevelsPage } from '@/pages/PreviousLevelsPage';
-import { AdminPage } from '@/pages/AdminPage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,7 +27,7 @@ function AppLayout({ children, statusText }: { children: ReactNode; statusText?:
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <div className="scanline" aria-hidden="true" />
         <Routes>
           <Route
@@ -60,14 +59,6 @@ export default function App() {
             element={
               <AppLayout statusText="Archivo">
                 <PreviousLevelsPage />
-              </AppLayout>
-            }
-          />
-          <Route
-            path="/admin"
-            element={
-              <AppLayout statusText="Admin">
-                <AdminPage />
               </AppLayout>
             }
           />
