@@ -1,0 +1,43 @@
+.guess-history {
+  min-width: 160px;
+  max-width: 220px;
+  padding: var(--space-lg);
+  border: var(--border-width) solid var(--color-border);
+  background: rgba(0, 0, 0, 0.15);
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.guess-history__title {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.guess-history__empty {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.guess-history__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.guess-history__item {
+  font-size: var(--font-size-sm);
+  color: var(--color-error);
+  text-decoration: line-through;
+  text-decoration-color: rgba(200, 120, 120, 0.6);
+  word-break: break-word;
+}

@@ -1,8 +1,9 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface UseAudioPlayerOptions {
   src: string;
-  clipDuration: number;
+  /** Omit to play until the file ends. */
+  clipDuration?: number;
   onPlayEnd?: () => void;
 }
 
@@ -11,6 +12,11 @@ export function useAudioPlayer({ src, clipDuration, onPlayEnd }: UseAudioPlayerO
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasPlayed, setHasPlayed] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const onPlayEndRef = useRef(onPlayEnd);
+
+  useEffect(() => {
+    onPlayEndRef.current = onPlayEnd;
+  }, [onPlayEnd]);
 
   const stop = useCallback(() => {
     if (timeoutRef.current) {
@@ -24,6 +30,8 @@ export function useAudioPlayer({ src, clipDuration, onPlayEnd }: UseAudioPlayerO
     setIsPlaying(false);
   }, []);
 
+  useEffect(() => () => stop(), [stop]);
+
   const play = useCallback(() => {
     stop();
 
@@ -33,19 +41,27 @@ export function useAudioPlayer({ src, clipDuration, onPlayEnd }: UseAudioPlayerO
     audio.currentTime = 0;
     audio.volume = 0.8;
 
+    const handleEnded = () => {
+      setIsPlaying(false);
+      onPlayEndRef.current?.();
+    };
+
     void audio.play().then(() => {
       setIsPlaying(true);
       setHasPlayed(true);
 
-      timeoutRef.current = setTimeout(() => {
-        audio.pause();
-        setIsPlaying(false);
-        onPlayEnd?.();
-      }, clipDuration * 1000);
+      if (clipDuration !== undefined) {
+        timeoutRef.current = setTimeout(() => {
+          audio.pause();
+          handleEnded();
+        }, clipDuration * 1000);
+      } else {
+        audio.addEventListener('ended', handleEnded, { once: true });
+      }
     }).catch(() => {
       setIsPlaying(false);
     });
-  }, [src, clipDuration, stop, onPlayEnd]);
+  }, [src, clipDuration, stop]);
 
   return { play, stop, isPlaying, hasPlayed };
 }

@@ -1,12 +1,13 @@
 import { create } from 'zustand';
 import type { GameSession, GameStatus, GuessResponse } from '@/types';
 import { getClipDurationForLives, INITIAL_LIVES } from '@/types';
+import type { LevelAttempt } from './progressStore';
 
 interface GameStore {
   session: GameSession | null;
   lastGuessResult: GuessResponse | null;
-  initSession: (levelId: string) => void;
-  recordWrongGuess: () => void;
+  initSession: (levelId: string, saved?: LevelAttempt) => void;
+  recordWrongGuess: (guessName: string) => void;
   recordSkip: () => void;
   recordWin: (result: GuessResponse) => void;
   recordLoss: () => void;
@@ -19,10 +20,25 @@ function createInitialSession(levelId: string): GameSession {
     attempts: 0,
     wrongGuesses: 0,
     skips: 0,
+    wrongGuessHistory: [],
     clipDuration: getClipDurationForLives(INITIAL_LIVES),
     livesRemaining: INITIAL_LIVES,
     status: 'playing',
     revealedAnswer: false,
+  };
+}
+
+function sessionFromAttempt(levelId: string, saved: LevelAttempt): GameSession {
+  return {
+    levelId,
+    attempts: saved.attempts,
+    wrongGuesses: saved.wrongGuesses,
+    skips: saved.skips,
+    wrongGuessHistory: saved.wrongGuessHistory ?? [],
+    livesRemaining: saved.livesRemaining,
+    clipDuration: getClipDurationForLives(saved.livesRemaining),
+    status: saved.status,
+    revealedAnswer: saved.status === 'lost',
   };
 }
 
@@ -34,22 +50,34 @@ export const useGameStore = create<GameStore>((set) => ({
   session: null,
   lastGuessResult: null,
 
-  initSession: (levelId) => {
+  initSession: (levelId, saved) => {
+    if (saved) {
+      set({
+        session: sessionFromAttempt(levelId, saved),
+        lastGuessResult: saved.status === 'won' ? (saved.winResult ?? null) : null,
+      });
+      return;
+    }
+
     set({
       session: createInitialSession(levelId),
       lastGuessResult: null,
     });
   },
 
-  recordWrongGuess: () => {
+  recordWrongGuess: (guessName) => {
     set((state) => {
       if (!state.session || state.session.status !== 'playing') return state;
 
+      const trimmed = guessName.trim();
       const livesRemaining = state.session.livesRemaining - 1;
       const session: GameSession = {
         ...state.session,
         attempts: state.session.attempts + 1,
         wrongGuesses: state.session.wrongGuesses + 1,
+        wrongGuessHistory: trimmed
+          ? [...state.session.wrongGuessHistory, trimmed]
+          : state.session.wrongGuessHistory,
         clipDuration: getClipDurationForLives(livesRemaining),
         livesRemaining,
       };
@@ -114,3 +142,18 @@ export const useGameStore = create<GameStore>((set) => ({
     set({ session: null, lastGuessResult: null });
   },
 }));
+
+export function sessionToAttempt(
+  session: GameSession,
+  winResult?: GuessResponse | null,
+): LevelAttempt {
+  return {
+    livesRemaining: session.livesRemaining,
+    attempts: session.attempts,
+    wrongGuesses: session.wrongGuesses,
+    skips: session.skips,
+    wrongGuessHistory: session.wrongGuessHistory,
+    status: session.status,
+    winResult: session.status === 'won' ? (winResult ?? undefined) : undefined,
+  };
+}

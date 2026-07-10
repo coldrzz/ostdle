@@ -7,7 +7,8 @@ import './PreviousLevelsPage.css';
 
 export function PreviousLevelsPage() {
   const navigate = useNavigate();
-  const getProgress = useProgressStore((s) => s.getProgress);
+  const getOutcome = useProgressStore((s) => s.getOutcome);
+  const isCompleted = useProgressStore((s) => s.isCompleted);
 
   const { data: levels = [], isLoading } = useQuery({
     queryKey: ['levels'],
@@ -36,9 +37,8 @@ export function PreviousLevelsPage() {
           <div className="levels-list-page__grid">
             {levels.map((level, index) => {
               const levelNumber = index + 1;
-              const progress = getProgress(level.id);
-              const solved = Boolean(progress);
-              const outcome = progress?.outcome;
+              const completed = isCompleted(level.id);
+              const outcome = getOutcome(level.id);
 
               return (
                 <button
@@ -46,12 +46,12 @@ export function PreviousLevelsPage() {
                   type="button"
                   className={[
                     'level-entry',
-                    solved && outcome ? `level-entry--${outcome}` : 'level-entry--unsolved',
+                    completed && outcome ? `level-entry--${outcome}` : 'level-entry--unsolved',
                   ].join(' ')}
                   onClick={() => navigate(`/play/${levelNumber}`)}
                 >
                   <div className="level-entry__icon" aria-hidden="true">
-                    {solved && level.coverImage ? (
+                    {completed && level.coverImage ? (
                       <img
                         className="level-entry__cover"
                         src={level.coverImage}
@@ -63,7 +63,7 @@ export function PreviousLevelsPage() {
                     )}
                   </div>
                   <div className="level-entry__label">
-                    {solved
+                    {completed
                       ? `Nivel ${levelNumber}: ${level.gameTitle}`
                       : `Nivel ${levelNumber}`}
                   </div>

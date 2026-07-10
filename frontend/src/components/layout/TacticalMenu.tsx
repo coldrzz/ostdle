@@ -12,7 +12,6 @@ const MENU_ITEMS: MenuItem[] = [
   { id: 'home', label: 'Inicio', path: '/' },
   { id: 'daily', label: 'Nivel del día', path: '/play/daily' },
   { id: 'archive', label: 'Niveles anteriores', path: '/levels' },
-  { id: 'admin', label: 'Administración', path: '/admin' },
 ];
 
 interface TacticalMenuProps {
