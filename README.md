@@ -1,6 +1,6 @@
 # Game OST Guesser
 
-Aplicación web para adivinar videojuegos a partir de fragmentos de sus bandas sonoras (OST). Inspirada en Wordle y Heardle, con estética táctica inspirada en menús militares modernos.
+Aplicación web para adivinar videojuegos a partir de fragmentos de sus bandas sonoras (OST). Inspirada en Wordle y Heardle, con estética táctica inspirada en Metal Gear Solid 3.
 
 ## Stack
 
